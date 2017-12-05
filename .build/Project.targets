@@ -294,7 +294,8 @@
 			  $(MSBuildProjectDirectory)\**\*.gif;
 			  $(MSBuildProjectDirectory)\**\*.jpg;
 			  $(MSBuildProjectDirectory)\**\*.png;
-        $(MSBuildProjectDirectory)\**\*.js;">
+              $(MSBuildProjectDirectory)\**\*.js;
+              $(MSBuildProjectDirectory)\$(IconFile);">
 			<Output TaskParameter="Include" ItemName="resources" />
 		</CreateItem>
 		<!-- Include module png as IconFile in resources zip -->
@@ -305,9 +306,6 @@
 		<Message Text="ModuleIconFile: @(moduleIconFile)" />
 		<Copy ContinueOnError="true" SourceFiles="@(moduleIconFile)" DestinationFolder="$(MSBuildProjectDirectory)">
 		</Copy>
-		<CreateItem Include="$(MSBuildProjectDirectory)\$(IconFile);">
-			<Output TaskParameter="Include" ItemName="resources" />
-		</CreateItem>
 		<CreateItem Include="$(InstallDir)\Resources.zip;
 					$(dnnFile);
           $(InstallDir)\License.txt;
