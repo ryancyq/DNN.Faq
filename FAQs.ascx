@@ -7,28 +7,26 @@
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
             <td style="width: 1px; vertical-align: top;">
-                <asp:Panel ID="pnlShowCategories" runat="server" Visible="false">
-                    <asp:MultiView ID="mvShowCategoryType" runat="server" ActiveViewIndex="0">
-                        <asp:View ID="vShowCategoryTypeList" runat="server">
-                            <div class="categoryList">
-                                <dnn:DnnListBox runat="server" ID="listCategories" CssClass="categoryListControl" OnItemDataBound="listCategories_ItemDataBound">
-                                    <itemtemplate>
-										<asp:CheckBox ID="chkCategory" runat="server" Text='<%# Eval("FaqCategoryName") %>' OnCheckedChanged="chkCategory_CheckedChanged" AutoPostBack="true" />
-									</itemtemplate>
-                                </dnn:DnnListBox>
-                            </div>
-                        </asp:View>
-                        <asp:View ID="vShowCategoryTypeTree" runat="server">
-                            <div class="categoryTree" style="margin-right: 20px;">
-                                <dnn:DnnTreeView ID="treeCategories" runat="server" CssClass="categoryTreeControl"
-                                    ShowLineImages="False" OnNodeClick="treeCategories_NodeClick" OnNodeDataBound="treeCategories_NodeDataBound">
-                                    <databindings>
-										<telerik:RadTreeNodeBinding Expanded="true" />
-									</databindings>
-                                </dnn:DnnTreeView>
-                            </div>
-                        </asp:View>
-                    </asp:MultiView>
+                <asp:Panel ID="pnlShowCategoriesList" runat="server" Visible="false">
+                    <div class="categoryList">
+                        <dnn:DnnListBox runat="server" ID="listCategories" CssClass="categoryListControl" OnItemDataBound="listCategories_ItemDataBound">
+                            <itemtemplate>
+								<asp:CheckBox ID="chkCategory" runat="server" Text='<%# Eval("FaqCategoryName") %>' OnCheckedChanged="chkCategory_CheckedChanged" AutoPostBack="true" />
+							</itemtemplate>
+                        </dnn:DnnListBox>
+                    </div>
+                </asp:Panel>
+            </td>
+            <td style="width: 1px; vertical-align: top;">
+                <asp:Panel ID="pnlShowCategoriesTree" runat="server" Visible="false">
+                    <div class="categoryTree" style="margin-right: 20px;">
+                        <dnn:DnnTreeView ID="treeCategories" runat="server" CssClass="categoryTreeControl"
+                            ShowLineImages="False" OnNodeClick="treeCategories_NodeClick" OnNodeDataBound="treeCategories_NodeDataBound">
+                            <databindings>
+								<telerik:RadTreeNodeBinding Expanded="true" />
+							</databindings>
+                        </dnn:DnnTreeView>
+                    </div>
                 </asp:Panel>
             </td>
             <td style="vertical-align: top;">
@@ -51,10 +49,10 @@
             </td>
         </tr>
         <tr style="height: 10px;">
-            <td colspan="2"> </td>
+            <td colspan="3"> </td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td colspan="3">
                 <asp:DataList ID="lstFAQs" runat="server" CellPadding="0" DataKeyField="ItemId" RepeatLayout="Flow" CssClass="faqsList" OnItemDataBound="lstFAQs_ItemDataBound" OnItemCommand="lstFAQs_ItemCommand">
                     <ItemTemplate>
                         <div>
