@@ -703,11 +703,11 @@ namespace DotNetNuke.Modules.FAQs
                                                                                        "GetFaqAnswerError");
                         //Set CallBackRef ClientScriptBlock
                         string jsClientCallBackRef = string.Format("var ClientCallBackRef{0}= \"{1}\";", lblAnswer.ClientID, ClientCallBackRef);
-                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), string.Format("ClientCallBackRef{0}", lblAnswer.ClientID), jsClientCallBackRef, true);
+                        RegisterScriptBlock(string.Format("ClientCallBackRef{0}", lblAnswer.ClientID), jsClientCallBackRef);
 
                         //Set LoadingTemplate ClientScriptBlock
                         string jsLoadingTemplate = string.Format("var LoadingTemplate{0}= '{1}';", lblAnswer.ClientID, HtmlDecode(this.LoadingTemplate));
-                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), string.Format("LoadingTemplate{0}", lblAnswer.ClientID), jsLoadingTemplate, true);
+                        RegisterScriptBlock(string.Format("LoadingTemplate{0}", lblAnswer.ClientID), jsLoadingTemplate);
 
                         //Define javascript action
                         string AjaxJavaScript = "javascript: SetAnswerLabel('" + lblAnswer.ClientID + "');";
@@ -795,6 +795,19 @@ namespace DotNetNuke.Modules.FAQs
                     FaqData = null;
                     BindData();
                     break;
+            }
+        }
+        
+        private void RegisterScriptBlock(string key, string script)
+        {
+            if (ScriptManager.GetCurrent(Page) != null)
+            {
+                // respect MS AJAX
+                ScriptManager.RegisterClientScriptBlock(Page, GetType(), key, script, true);
+            }
+            else
+            {
+                Page.ClientScript.RegisterClientScriptBlock(GetType(), key, script, true);
             }
         }
 
